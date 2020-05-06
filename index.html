@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body class="body">
+	<div class="container">
+		<div class="first">
+		<h1 class="quiz">QUIZ GAME</h1><br>
+		<p class="info">20 points for each correct answer</p>
+	    </div>
+		<div>
+		<button id="start-btn" class="start-btn btn">Start Quiz</button>
+		</div>
+
+	<div id="quiz-container" class="hide">
+
+		<div class="quiz-track">
+
+			<div id="quiz-counter">
+				<h3 class="quiz-counter-question">Question
+				<span class="countQuestion"></span></h3>
+			</div>
+
+		    <div class="score">
+				<h3 class="score-text">Your Score:
+				<span class="score-point">0</span></h3>
+			</div>
+
+		</div>
+
+		<div id="question-container">
+
+			<div class="question-head">Questions</div>
+	    	<div id="answer-buttons" class="btn-grid">
+		    	<button id="1" class="ans-btn"></button>
+		    	<button id="2" class="ans-btn"></button>
+		    	<button id="3" class="ans-btn"></button>
+		    	<button id="4" class="ans-btn"></button>
+	    	</div>
+	    </div>
+	</div>
+
+	    <div class="control">
+	    	<button id="next-btn" class="next-btn btn hide">Next</button>
+	    </div>
+
+</div>
+
+	<script type="text/javascript" src="quiz.js"></script>
+</body>
+</html>
