@@ -16,9 +16,9 @@ body {
 	justify-content: center;
 	margin: 4rem auto;
 	max-width: 450px;
-	padding: 0.5rem;
+	padding: 0.2rem;
 	border-radius: 20px;
-	width: 90%;
+	width: 80%;
 	height: 80vh;
 	flex-direction: column;
 }
@@ -118,8 +118,7 @@ body {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	flex-direction: column;
-	
+	flex-direction: column;	
 }
 
 .ans-btn {
@@ -167,14 +166,17 @@ body {
     color: #274775;
 }
 
+.end-quiz {
+	margin-bottom: 30px;
+}
+
 .end-sscore {
 	font-size: 30px;
 }
 
 .sscore {
 	color: #274775;
-	width: 50px;
-	font-size: 35px;
+	font-size: 30px;
 	text-align: center;
 }
 
@@ -198,4 +200,35 @@ body {
 	background-color: #6048b5;
 	border-color: black;
 	color: white;
+}
+
+@media only screen and (min-width: 300px) and (max-width: 380px) and (orientation: portrait){
+
+.container {
+    width: 95%;
+}
+
+.quiz-track {
+	display: flex;
+	justify-content: space-between;
+	color: #274775;
+	font-size: 15px;
+	font-weight: bold;
+}
+.question-head {
+    font-size: 17px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.btn-grid {
+	display: grid;
+	gap: 10px;
+	padding: 5px;
+	width: 250px;
+}
+
+.info {
+	color: red;
+	font-size: 15px;
 }

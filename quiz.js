@@ -10,12 +10,10 @@ const questionElement = document.querySelector(".question-head");
 const answerButtonsElement = document.getElementById("answer-buttons");
 const scorePoint = document.querySelector(".score-point");
 let questionCounterElement = document.querySelector(".countQuestion");
-const correctAnswers = document.querySelector(".correct-answers")
-const maxScore = document.querySelector(".max-score")
-const endQuiz = document.querySelector(".end-quiz-container")
 
 let point = 0,
 	countQuestion = 0,
+	maxScore = 100,
 	answer1,
 	answer2,
 	answer3,
@@ -25,35 +23,40 @@ let sortQuestions, currentQuestionIndex, currentQuestion;
 
 body.classList.add("body-flex");
 
+// declare a function to start the quiz
 function startQuiz() {
-	startButton.classList.add("hide")
-	nextButton.classList.remove("hide")
-	quizPage.classList.add("hide")
-	sortQuestions = questions.sort(() => Math.random() - .5)
+	startButton.classList.add("hide");
+	nextButton.classList.remove("hide");
+	quizPage.classList.add("hide");
+	//show the questions randomly
+	sortQuestions = questions.sort(() => Math.random() - .5);
+	//time delay
 	setTimeout(() => {
 		body.classList.remove("body-flex");
 		quizContainer.classList.remove("hide");
 	}, 100);
 	currentQuestionIndex = 0;
-	point = 0
+	point = 0;
 	nextQuestion();
-}
+};
 
-const resetState = () => {
+function resetState() {
 	nextButton.classList.add("hide");
 	if (answerButtonsElement.firstChild) {
 		answerButtonsElement.innerHTML = "";
-	}
+	};
 };
 
-const nextQuestion = () => {
+// function to go to the next question
+function nextQuestion() {
 	resetState();
 	currentQuestion = sortQuestions[currentQuestionIndex];
 	showQuestion(currentQuestion);
-}
+};
 
+// function to display the questions
 function showQuestion(question) {
-	questionElement.textContent = question.question
+	questionElement.textContent = question.question;
 
 	question.answers.forEach((option, index) => {
 		index++;
@@ -74,26 +77,30 @@ function showQuestion(question) {
 		answer4 = document.getElementById("4");
 		button.addEventListener("click", selectAnswer);
 	});
-		
-	questionCounterElement.innerText = `${currentQuestionIndex + 1} of ${sortQuestions.length}`
-}
 
-const selectAnswer = (e) => {
-	const selectedButton = e.target
-	const correct = selectedButton.dataset.correct
+	// increase the question counter
+	questionCounterElement.innerText = `${currentQuestionIndex + 1} of ${sortQuestions.length}`;
+};
+
+// function to select answer
+function selectAnswer(e) {
+	const selectedButton = e.target;
+	const correct = selectedButton.dataset.correct;
 	
+	// check if the selected answer is correct and add green background
 	if (correct) {
-		point +=20
-		scorePoint.textContent = `${point}`
-		selectedButton.classList.add("correct")
-		selectedButton.classList.add("white")
-		answerButtonsElement.classList.add("pointer-fix")
+		point +=20;
+		scorePoint.textContent = `${point}`;
+		selectedButton.classList.add("correct");
+		selectedButton.classList.add("white");
+		answerButtonsElement.classList.add("pointer-fix");
 	} else {
-		selectedButton.classList.add("wrong")
-		selectedButton.classList.add("white")
-		answerButtonsElement.classList.add("pointer-fix")
+		// add red background to the wrong option
+		selectedButton.classList.add("wrong");
+		selectedButton.classList.add("white");
+		answerButtonsElement.classList.add("pointer-fix");
 	
-
+//add green background to the correct answer
 	if (answerButtonsElement.answer === 1) {
 			answer1.classList.add("correct");
 		} else if (answerButtonsElement.answer === 2) {
@@ -102,28 +109,29 @@ const selectAnswer = (e) => {
 			answer3.classList.add("correct");
 		} else if (answerButtonsElement.answer === 4) {
 			answer4.classList.add("correct");
-		}
-	}
+		};
+	};
 
 	if(sortQuestions.length > currentQuestionIndex + 1) {
-		nextButton.classList.remove("hide")
+		nextButton.classList.remove("hide");
 	} else {
 		setTimeout(() => {
 			showResults();
 		}, 1500);
-	}
+	};
 };
 
-const showResults = () => {
+//function to show results
+function showResults() {
 	container.innerHTML = "";
 	document.body.classList.add("body-flex");
 	const markup = `
     <div class="end-quiz-container">
         <h1 class="end-quiz">Nice Try!</h1>
         <h2 class="end-sscore">
-        Your score is: 
+        You scored 
         </h2>
-        <p class="sscore">${point}</p>
+        <p class="sscore">${point}<span> out of ${maxScore}</span></p>
         <button id="btn-again" class="btn-reload btn">
             Play Again
         </button>
@@ -137,6 +145,7 @@ const showResults = () => {
 	});
 };
 
+//my questions and the correct answers
 const questions = [
 	{
 		question: "Which is the correct CSS syntax?",
@@ -152,10 +161,10 @@ const questions = [
 	{
 		question: "What does HTML stand for?",
 		answers: [
-		"Hypertext Markup Language",
-		"Concurrent Style Sheet",
-		"Cascading Style Sheet",
-		"Concurrent Standard Sheet",
+		"Hyper Text Markup Language",
+		"Hyper Tool Markup Language",
+		"Home Tool Markup Language",
+		"Home Text Markup Language",
 		],
 		answer: 1,
 	},
@@ -164,9 +173,9 @@ const questions = [
 		question: "What is the full meaning of CSS?",
 		answers: [
 			"Cascading Standard Sheet",
-			"Concurrent Style Sheet",
+			"Creative Style Sheet",
 			"Cascading Style Sheet",
-			"Concurrent Standard Sheet",
+			"Creative Standard Sheet",
 		],
 		answer: 3,
 	},
@@ -183,7 +192,7 @@ const questions = [
 	},
 
 	{
-		question: "Which property applies a color to text?",
+		question: "Which property applies color to text?",
 		answers: [
 			"color",
 			"background-color",
@@ -192,11 +201,14 @@ const questions = [
 		],
 		answer: 1,
 	},
-]
+];
 
-startButton.addEventListener("click", startQuiz)
+//EVENT LISTENER//
+//start quiz 
+startButton.addEventListener("click", startQuiz);
+
 
 nextButton.addEventListener("click", () => {
-	currentQuestionIndex++
-	nextQuestion()
-})
+	currentQuestionIndex++;
+	nextQuestion();
+});
